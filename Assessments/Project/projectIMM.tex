@@ -1,0 +1,101 @@
+\documentclass[letterpaper]{article}
+
+\usepackage[margin=1.5in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{matrix,decorations.text,decorations.pathmorphing,decorations.markings,arrows,calc,shapes.geometric,patterns,shadows,intersections,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+\usepackage{mathtools}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue,citecolor=blue}
+
+\renewcommand{\tableautorefname}{Table}
+\renewcommand{\figureautorefname}{Fig.}
+\renewcommand{\equationautorefname}{Eq.}
+\renewcommand{\sectionautorefname}{Sec.}
+\renewcommand{\subsectionautorefname}{Sec.}
+\renewcommand{\chapterautorefname}{Chapter}
+
+\usepackage{caption}
+\captionsetup[figure]{labelfont={bf},name={Figure},labelsep=period}
+
+\usepackage[utf8]{inputenc}
+\pagenumbering{Roman}
+
+\usepackage[symbol]{footmisc}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\title{\textbf{Intro Math Modeling -- MATH-UA 251}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-1cm}
+Use the tools and material covered in class, recitation sections, and homework assignments, along with other resources such as textbooks and scientific articles, to perform a research study on the dynamics of pendulums.
+
+\begin{figure}[!b]
+\begin{center}
+  \begin{tikzpicture}
+    \pgfmathsetmacro{\myAngle}{30}
+    \pgfmathsetmacro{\xOL}{0}
+    \pgfmathsetmacro{\xOR}{6}
+    \coordinate (centro) at (\xOL,0);
+    \node[anchor=south] at (centro) {$O$};
+    \draw[dashed,gray,-] (centro) -- ++ (0,-3.5) coordinate (mary);
+    \draw[] (centro) -- ++(270+\myAngle:3) coordinate (bob);
+    \pic [draw, ->, "$\theta$", angle eccentricity=1.5] {angle = mary--centro--bob};
+    \node[anchor=south west] at ($(centro)!0.5!(bob)$) {$\ell$};
+    \filldraw [fill=black!40,draw=black] (bob) circle[radius=0.1] node[anchor=west] {$m$};
+    \coordinate (grav) at (\xOL-1,-1);
+    \pgfmathsetmacro{\al}{0.5};
+    \draw[->,>=stealth] (grav) --++ (0,-\al);
+    \node[anchor=east] at ($(grav)+(0,-0.5*\al)$) {$g$};
+    \node[] at ($(centro)+(-1,0.5)$) {(a)};
+
+    \coordinate (centroR) at (\xOR,0);
+    \node[anchor=south] at (centroR) {$O$};
+    \draw[dashed,gray,-] (centroR) -- ++ (0,-3.5) coordinate (maryR);
+    \draw[ultra thick] (centroR) -- ++(270+\myAngle:3) coordinate (bobR);
+    \pic [draw, ->, "$\theta$", angle eccentricity=1.5] {angle = maryR--centroR--bobR};
+    \node[anchor=south west] at ($(centroR)!0.5!(bobR)$) {$\ell,\; m$};
+    \coordinate (gravR) at (\xOR-1,-1);
+    \pgfmathsetmacro{\al}{0.5};
+    \draw[->,>=stealth] (gravR) --++ (0,-\al);
+    \node[anchor=east] at ($(gravR)+(0,-0.5*\al)$) {$g$};
+    \node[] at ($(centroR)+(-1,0.5)$) {(b)};
+\end{tikzpicture}
+  \caption{(a) A simple pendulum of mass $m$, attached to an anchor $O$ via a mass-less rod with length $\ell$. (b) A circular rod of radius $a$ (thickness $2a$), mass $m$, and length $\ell$, connected to an anchor $O$.}
+  \label{Fig:pendulum}
+\end{center}
+\end{figure}
+
+\begin{enumerate}[(i)]
+\item Start with a simple pendulum consisting of a spherical mass $m$ anchored to a fixed point $O$ via a mass-less rod of length $\ell$ (cf. \autoref{Fig:pendulum}(a)). Perform a dimensional analysis on the problem to find the period of oscillation $\tau$ (i.e., time scale of the system). Use the Newton's second law to write the governing ordinary differential equation (ODE); a solution to this \emph{nonlinear} equation should relate $\theta$, or an equivalent variable, to time $t$. Then, for small deviation angles $\theta$, use linear approximation to linearize the ODE. Analytically solve this linear ODE to find $\theta$ as a function of $t$. Let $\theta=\theta_0$ and $\dot{\theta}=0$ be the initial conditions of the problem. Using the concept of dimensional homogeneity, find the time scale of the problem from the obtained solution. Compare it to the one you found from dimensional analysis.
+
+\item Use the Euler method to numerically solve the original nonlinear ODE. First, make a plot of $\theta$ versus the dimensionless time, $t/\tau$, for different time steps $\Delta t$. This plot should cover, at least, a couple of the oscillation periods. Discuss what happens qualitatively as the $\Delta t$ changes. Then, for a reasonably small $\Delta t$ ($\ll\tau$), plot $\theta$ versus time for different values of $\theta_0$, along with the corresponding analytical solutions to the linear problem. Discuss what happens as $\theta_0$ decreases.
+
+\item Revisit the problem accounting for the drag force on the mass. Additionally, make plots of $\dot{\theta}$ versus $\theta$ for different conditions. Discuss the important characteristics of the plots for system with and without drag. Interpret the results.
+
+\item Revisit the problem when the rod itself has a mass $m$ with no mass connected to it (cf. \autoref{Fig:pendulum}(b)). When accounting for the drag force, assume that $F_D$ is linearly proportional to the magnitude of the normal velocity and the projected area. 
+
+\item Perform an analysis of the double-pendulum system ($\textbf{bonus}$). 
+  
+\end{enumerate}
+
+{\begin{center}\Large{\textbf{Project write-up}}\end{center}}
+
+Write your report as a short technical paper that will describe the problem and background, rationalize your modeling choices, set up the equations, explain all parameters in the model, present the analysis and solutions of the model, and interpret the results. Feel free to analyze the problem beyond what suggested above.
+
+Structure the document as a scientific report with multiple sections: abstract, introduction, model description, results, conclusions, references. You may write the report using \LaTeX, Microsoft Word, etc. Regardless, a PDF should be submitted. Long derivations (if any) should be provided in an Appendix. Submit your codes (fully commented) as well, and if needed, provide a user guide for the code either in an Appendix or as comments in the code. References should be provided. Follow the citation style of Physical Review Letters.
+
+The grading criteria include the scientific content of the report, along with various editorial factors such as organization of the paper, consistency (in notation, units, etc.), readability, and correct/accurate/clear figures. In particular, all figures should have axis labels (with units, if any), tick labels, legends (if applicable), a self-contained caption (below the figure).
+
+The submitted report should present an original work performed by the author. Simple pendulum is a well-known, much studied, problem in Physics. You can, of course, study those prior work, but submit your unique version of the modeling, solution, coding, analysis, interpretation, etc. Please refer to the syllabus for more info on the honor code.
+
+\end{document}

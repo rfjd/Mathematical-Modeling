@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+
+% Solutions toggle
+\newif\ifsolutions
+\solutionsfalse
+%% \solutionstrue
+
+% ASSIGNMENT NUMBER
+\newcommand{\hwnumber}{1}
+\newcommand{\booksection}{Dimensional Analysis}
+\newcommand{\duedate}{}
+% -------------
+
+\input{hw_header}
+
+\begin{document}
+% HEADER
+\input{hw_title}
+
+% -------------------
+
+\begin{ex}
+
+  [50 pts] We wish to use the Buckingham $\pi$ theorem to estimate the drag force on an airplane cruising at $400\;\mathrm{km/hr}$ in standard air (atmospheric pressure) using a scaled $1:10$ down model (geometrical dimensions of the model are $0.1$ of that of the prototype). Let the air speed in the wind tunnel be $400\;\mathrm{km/hr}$ as well. Assuming the same air temperature for the model and prototype, determine the required pressure in the tunnel, and the drag on the prototype corresponding to $1\;\mathrm{N}$ on the model.
+
+\vspace{0.5cm}\noindent\textbf{Hints:}
+\begin{enumerate}[(i)]
+  \item The drag force, $F$, is expected to depend on the following parameters: $V$ (wind speed), $\mu$ (viscosity), $\rho$ (density), $\ell$ (length of the airplane), and $w$ (wing span of the airplane).
+  \item Assume that the air viscosity does not depend on the air pressure.
+  \item Use Ideal Gas Law $p MW=\rho R T$ to relate the air density to pressure. ($p$: pressure, $R$: universal gas constant, $MW$: molecular weight of air (constant), $T$: absolute temperature)
+\end{enumerate}
+		
+\begin{solution}
+  We have $F=f(V,\mu,\rho,\ell,w)$. We use the Buckingham $\pi$ theorem to find the dimensionless group.
+  \begin{align*}
+    F&\;\dot{=}\;MLT^{-2},\\
+    V&\;\dot{=}\;LT^{-1},\\
+    \mu&\;\dot{=}\;ML^{-1}T^{-1},\\
+    \rho&\;\dot{=}\;ML^{-3},\\
+    \ell&\;\dot{=}\;L,\\
+    w&\;\dot{=}\;L.
+  \end{align*}
+  Therefore, the number of reference dimensions is $r=3$, which, by Buckingham $\pi$ theorem, yields $6-3=3$ dimensionless groups. We pick $\ell$, $V$, and $\rho$ as the repeating variables:
+  \begin{align*}
+    &\Pi_1=F\ell^aV^b\rho^c=M^0L^0T^0\Rightarrow a=-2,b=-2,c=-1\Rightarrow \Pi_1=\frac{F}{\ell^2V^2\rho},\\
+    &\Pi_2=\mu\ell^aV^b\rho^c=M^0L^0T^0\Rightarrow a=-1,b=-1,c=-1\Rightarrow \Pi_2=\frac{\mu}{\ell V\rho},\\
+    &\Pi_3=w\ell^aV^b\rho^c=M^0L^0T^0\Rightarrow a=-1,b=0,c=0\Rightarrow \Pi_3=\frac{\ell}{w}.
+  \end{align*}
+  Finally, we can express the results of the dimensional analysis as
+  \begin{equation*}
+    \Pi_1=\phi\left(\Pi_2,\Pi_3\right)\Rightarrow\Pi_1=\psi\left(1/\Pi_2,\Pi_3\right)\Rightarrow\frac{F}{\ell^2V^2\rho}=\psi\left(\frac{\ell V\rho}{\mu},\frac{\ell}{w}\right).
+  \end{equation*}
+
+  Now, for the model to represent the prototype, we need
+  \begin{equation*}
+    \frac{\ell_m V_m\rho_m}{\mu_m}=\frac{\ell V\rho}{\mu},\quad \frac{\ell}{w}=\frac{\ell_m}{w_m},
+  \end{equation*}
+  where the subscript $m$ denotes the model. The second condition is automatically satisfied since the model is a $1:10$ scaled down version of the prototype: $\ell_m=0.1\ell$ and $w_m=0.1w$. Consequently, we only need to ensure that the Reynolds numbers are the same:
+  \begin{equation*}
+    \frac{\ell_m V_m\rho_m}{\mu_m}=\frac{\ell V\rho}{\mu}\Rightarrow\frac{\rho_m}{\rho}=\frac{\mu_m}{\mu}\frac{V}{V_m}\frac{\ell}{\ell_m}=\frac{\mu_m}{\mu}\cdot 1\cdot 10=10\frac{\mu_m}{\mu}.
+  \end{equation*}
+  As this result indicates, the same fluid with $\rho_m=\rho$ and $\mu_m=\mu$ cannot be used if the Reynolds number similarity is to be maintained. We can pressurize the wind tunnel to increase the density $\rho_m$. We assume that $\mu_m$ does not change with pressure significantly. Therefore, $\mu_m=\mu$, and we need
+  \begin{equation*}
+    \frac{\rho_m}{\rho}=10\Rightarrow \frac{p_m MW/RT_m}{p MW/RT}=\frac{p_m}{p}=10.
+  \end{equation*}
+  So, the pressure needed to ensure that $\mathrm{Re}_m=\mathrm{Re}$ is $10$ times higher than the pressure at which the actual prototype operates. Given that $p=1\;\mathrm{atm}$, $p_m=10\;\mathrm{atm}$.
+
+  Now that $\Pi_{1m}=\Pi_{1}$ and $\Pi_{2m}=\Pi_2$, we conclude that
+  \begin{equation*}
+    \frac{F}{\ell^2V^2\rho}=\frac{F_m}{\ell_m^2V_m^2\rho_m}\Rightarrow F=\left(\frac{\ell}{\ell_m}\right)^2\left(\frac{V}{V_m}\right)^2\left(\frac{\rho}{\rho_m}\right)F_m=10^2\cdot 1\cdot 0.1F_m=10F_m.
+  \end{equation*}
+  So for a drag of $F_m=1\;\mathrm{N}$ on the model, the corresponding drag on the prototype is $F=10\;\mathrm{N}$.
+\end{solution}
+\end{ex}
+
+\begin{ex}
+
+  [50 pts] From dimensional analysis, we know that the drag coefficient $C_D$ of a smooth sphere moving in a fluid is a function of Reynolds number:
+  \begin{equation*}
+    C_D=f(\mathrm{Re})=f\left(\frac{\rho V D}{\mu}\right),
+  \end{equation*}
+  where $\rho$ and $\mu$ are the density and viscosity of the fluid (e.g., air), $D$ is the diameter of the sphere, and $V$ is its velocity. The drag force can then be expressed as
+  \begin{equation*}
+    F=\tfrac{1}{2}C_D\rho A V^2
+  \end{equation*}
+  with $A$ as the projected area. Note that you can derive the Stokes drag force formula (valid when $\mathrm{Re}\lesssim 1$) from the above equation by inserting $C_D=24/\mathrm{Re}$.
+
+  Now consider two raindrops, one with diameter $2\;\mathrm{mm}$ and another one with diameter $4\;\mathrm{mm}$. Which one falls faster in the air and by how much?
+
+\vspace{0.5cm}\noindent\textbf{Hints:}
+\begin{enumerate}[(i)]
+\item Assume that the drops fall at their `terminal' velocities, which is the velocity at which the drag force and gravitational forces cancel each other: $F=\tfrac{1}{6}\pi D^3(\rho_s-\rho)g$, where $\tfrac{1}{6}\pi D^3$ is the volume of the droplet, $\rho_s$ is its density ($\approx 1000\;\mathrm{kg/m^3}$), and $g\approx 9.8\;\mathrm{m/s^2}$ is the gravitational acceleration. Also, for the air, use $\rho=1\;\mathrm{kg/m^3}$ and $\mu=2\times 10^{-5}\;\mathrm{Pa\cdot s}$.
+\item Initially assume that the drops fall in the Stokes regime (i.e., $\mathrm{Re}\lesssim 1$) and use the Stokes drag formula. After finding the terminal velocity calculate the $\mathrm{Re}$ number to verify your initial assumption.
+\item In case the Stokes regime is not valid: for high Reynolds number $10^3\lesssim\mathrm{Re}\lesssim10^5$, one can assume that $C_D$ is constant and not a function of $\mathrm{Re}$. Use $C_D\approx 0.4$ and redo the above process. Verify if the Reynolds number is within the range.
+\end{enumerate}
+
+\begin{solution}
+  We first derive the Stokes drag formula:
+  \begin{equation*}
+    F=\tfrac{1}{2}C_D\rho A V^2=\tfrac{1}{2}\left(\tfrac{24\mu}{\rho V D}\right)\rho \left(\tfrac{1}{4}\pi D^2\right) V^2=3\pi\mu DV.
+  \end{equation*}
+  Now, we find the terminal velocity by balancing the Stokes drag and gravitational forces:
+  \begin{equation*}
+    3\pi\mu DV=\tfrac{1}{6}\pi D^3(\rho_s-\rho)g\Rightarrow V=\frac{D^2(\rho_s-\rho)g}{18\mu}.
+  \end{equation*}
+  We see that the terminal velocity is proportional to the square of the diameter. Therefore,
+  \begin{equation*}
+    \frac{V(D=4\;\mathrm{mm})}{V(D=2\;\mathrm{mm})}=2^2=4.
+  \end{equation*}
+  In other words, the $4\;\mathrm{mm}$-droplet falls $4$ times faster than the $2\;\mathrm{mm}$-droplet. We now need to verify that we could use the Stokes drag formula by calculating the Reynolds number:
+  \begin{equation*}
+    \mathrm{Re}=\frac{\rho VD}{\mu}=\frac{\rho(\rho_s-\rho)D^3 g}{18\mu^2}.
+  \end{equation*}
+  Using $\rho_s=1000\;\mathrm{kg/m^3},\rho=1\;\mathrm{kg/m^3},\mu=2\times 10^{-5}\;\mathrm{Pa\cdot s}$, the Reynolds number become $10885$ and $87082$ for $D=2\;\mathrm{mm}$ and $4\;\mathrm{mm}$, respectively. This is \textbf{very} high! So the Stokes law is not valid.
+
+  Now we let $C_D=0.4$ and constant:
+  \begin{equation*}
+    \tfrac{1}{2}C_D\rho AV^2=\tfrac{1}{6}\pi D^3(\rho_s-\rho)g\Rightarrow V=\sqrt{\frac{4D(\rho_s-\rho)g}{3C_D\rho}}.
+  \end{equation*}
+  Therefore, the falling velocity is proportional to the square of the diameter:
+\begin{equation*}
+    \frac{V(D=4\;\mathrm{mm})}{V(D=2\;\mathrm{mm})}=\sqrt{2}=1.41.
+  \end{equation*}
+Using the new formula for the velocity to calculate the Reynolds number yields $\mathrm{Re}\approx 808$ and $\approx 2285$ for $D=2\;\mathrm{mm}$ and $4\;\mathrm{mm}$, respectively. This is approximately within the range for which $C_D$ remains constant. Finally, we find the falling velocities as $8.08\;\mathrm{m/s}$ and $11.43\;\mathrm{m/s}$ for the $2$-$\mathrm{mm}$ and $4$-$\mathrm{mm}$ raindrops, respectively.
+\end{solution}
+\end{ex}
+
+\begin{ex}
+
+  [10+10+10+10 pts] Heat transfer flux from a surface at temperature $T_s$ to an environment at temperature $T_{\infty}$ is given by $h(T_s-T_{\infty})$, where $h$ is the heat transfer coefficient with dimensions $\mathrm{energy/(time\cdot area\cdot temperature)}$. For a sphere suspended in a still air, the heat transfer coefficient depends on the sphere diameter, $D$, and conductivity of the air, $k$, (with dimensions $\mathrm{energy/(time\cdot length\cdot temperature)}$). Hence, one can write $h=f(k,D)$.
+
+\begin{enumerate}[(i)]
+\item List all of the parameters and their dimensions. Hint: $\mathrm{energy}\doteq\mathrm{force\cdot length}$. 
+\item Find the number of \emph{reference} dimensions, and subsequently, the number of dimensionless groups.
+\item Find the dimensionless groups using the method described in class.
+\item Interpret the result.
+\end{enumerate}
+  
+\begin{solution}
+  We use $M,L,T,\theta$ to denote the primary dimensions mass, length, time, and temperature.
+  \begin{align*}
+    h&\doteq\mathrm{\frac{energy}{time\cdot area\cdot temperature}}\doteq\mathrm{\frac{force\cdot length}{time\cdot area\cdot temperature}}\doteq\frac{MLT^{-2}L}{TL^2\theta}\doteq MT^{-3}\theta^{-1},\\
+    k&\doteq\mathrm{\frac{energy}{time\cdot length\cdot temperature}}\doteq\mathrm{\frac{force\cdot length}{time\cdot length\cdot temperature}}\doteq\frac{MLT^{-2}L}{TL\theta}\doteq MLT^{-3}\theta^{-1},\\
+    D&\doteq L.
+  \end{align*}
+
+  A simple inspection shows that $h$ and $k$ differ from each other by a length scale. Indeed, the dimensions required to fully describe the system are $MLT^{-3}\theta^{-1}$ and $L$. Hence, the total number of dimensionless group(s) is $3-2=1$. We can take $D$ and $k$ as the repeating parameters and write the dimensionless group as
+  $$\Pi=h k^a D^b$$
+  It is easy to find that we need $a=-1,b=1$ for $\Pi$ to be dimensionless, i.e., $\Pi=M^0L^0T^0\theta^0$. Since the problem is characterized by only one dimensionless number, we conclude that
+  $$\Pi=\frac{hD}{k}=\mathrm{constant}.$$
+
+  The dimensionless group $h\ell/k$ is known as the Nusselt number, where $\ell$ is a length scale ($D$ for a sphere). For a sphere in still air, one can show (by solving transport equations) that $hD/k=2$. 
+\end{solution}  
+
+\end{ex}
+
+\end{document}

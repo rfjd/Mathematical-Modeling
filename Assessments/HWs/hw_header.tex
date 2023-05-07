@@ -1,0 +1,58 @@
+%%% Packages
+\usepackage[margin=1in, footskip=24pt, headheight=24pt]{geometry}
+\usepackage{amsmath, amssymb, amsthm, graphicx}
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\usepackage[colorlinks, urlcolor=blue]{hyperref}
+\usepackage{color}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage{lastpage}
+\usepackage{multirow, multicol}
+\usepackage{tikz}
+\usetikzlibrary{matrix,decorations.text,decorations.pathmorphing,decorations.markings,arrows,calc,shapes.geometric,patterns,shadows,intersections,decorations.markings,decorations.pathreplacing,decorations.pathreplacing,backgrounds,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+%% \renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\ddx}{\frac{d}{dx}}
+
+\global\long\def\V#1{\boldsymbol{#1}} %vector
+\global\long\def\M#1{\boldsymbol{#1}} %matrix
+
+\global\long\def\D#1{\Delta#1} %\D{t} for time step size
+\global\long\def\d#1{\delta#1} %\d{t} for small increment
+
+\global\long\def\norm#1{\left\Vert #1\right\Vert }
+\global\long\def\abs#1{\left|#1\right|}
+
+\global\long\def\grad{\M{\nabla}}
+\global\long\def\av#1{\left\langle #1\right\rangle }
+
+% HEADER MACROS
+\input{../courseinfo.tex}
+\fancyhead[RO]{\term}
+\fancyhead[LO]{\course}
+% -------------
+
+%%% Theorem Styles
+\theoremstyle{definition}
+\newtheorem{ex}{Exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%% Solutions %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{solution} and \begin{answerspace} must be at the beginning of the line.
+% Doesn't work inside the \myversions command. Use if statements instead.
+% No underscores in comment names
+
+\ifsolutions
+\newenvironment{solution}{\color{blue}}{} \excludecomment{answerspace} \newenvironment{notes}{\color{red} \noindent Grading Notes:}{}
+\else
+\excludecomment{notes} \excludecomment{solution} \includecomment{answerspace} 
+\fi
+%%%%%%%%%%%%%%%%%%%% End Solutions %%%%%%%%%%%%%%%%%%%%%%%e}
